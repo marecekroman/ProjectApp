@@ -1,0 +1,1 @@
+SplashScreen and appIcon downloaded from: https://icons8.com/icon/TlnNBAQWZ6Vv/chatgpt
