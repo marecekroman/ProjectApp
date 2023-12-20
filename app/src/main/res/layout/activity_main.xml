@@ -15,13 +15,54 @@
         tools:context=".view.MainViewActivity">
 
         <TextView
+            android:id="@+id/ChatResponse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/ChatResponse"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/QuestionField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.445"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/QuestionField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
+            android:ems="10"
+            android:hint="@string/QuestionField"
+            android:inputType="textMultiLine"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/SearchButton"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/SearchButton"
+            android:layout_width="88dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="2dp"
+            android:text="@string/SearchButton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/ChatResponse" />
+
+        <Button
+            android:id="@+id/SettingsButton"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:contentDescription="@string/SettingsButton"
+            android:onClick="@{ () -> viewModel.toSettings() }"
+            app:icon="@android:drawable/ic_menu_preferences"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_menu_manage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

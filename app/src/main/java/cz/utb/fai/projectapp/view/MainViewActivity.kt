@@ -1,6 +1,7 @@
 package cz.utb.fai.projectapp.view
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -55,6 +56,15 @@ class MainViewActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        viewModel.processToSettings.observe(this) { value ->
+            if (value) {
+                // go to detail activity
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                viewModel.processToSettings.value = false
+            }
+        }
 
     }
 }
