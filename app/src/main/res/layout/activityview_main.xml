@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
+
         <variable
             name="viewModel"
             type="cz.utb.fai.projectapp.mainViewModel.MainViewModel" />
@@ -20,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:hint="@string/ChatResponse"
+            android:text="@{ viewModel.responseMutable}"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/QuestionField"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,17 +39,19 @@
             android:ems="10"
             android:hint="@string/QuestionField"
             android:inputType="textMultiLine"
+            android:text="@={ viewModel.questionMutable}"
             android:minHeight="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/SearchButton"
+            app:layout_constraintEnd_toStartOf="@+id/SendButton"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/SearchButton"
+            android:id="@+id/SendButton"
             android:layout_width="88dp"
             android:layout_height="48dp"
             android:layout_marginEnd="2dp"
             android:text="@string/SearchButton"
+            android:onClick="@{ () -> viewModel.chatCompletion()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ChatResponse" />
