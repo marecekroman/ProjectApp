@@ -38,10 +38,7 @@ class ChatRepository(private val apiService: ChatGPTService) {
                     ) {
                         val code = response.code()
                         if (code == 200){
-                            response.body()?.choices?.get(0)?.message?.let {
-                                Log.d("Message: ", it.toString())
-                                _chatResponse.value = it.toString()
-                            }
+                            _chatResponse.value = response.body()?.choices?.get(0)?.message?.content
                         } else {
                             Log.d("Error: ", response.errorBody().toString())
                         }
