@@ -16,18 +16,21 @@
         android:layout_height="match_parent"
         tools:context=".view.MainViewActivity">
 
-         <TextView
-            android:id="@+id/ChatResponse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/ChatResponse"
-            android:text="@{ viewModel.responseMutable}"
-            android:textSize="18sp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messages"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="2dp"
             app:layout_constraintBottom_toTopOf="@+id/QuestionField"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.445"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layoutManager = "androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/SettingsButton">
+    </androidx.recyclerview.widget.RecyclerView>
 
         <EditText
             android:id="@+id/QuestionField"
@@ -52,11 +55,10 @@
             android:layout_width="88dp"
             android:layout_height="48dp"
             android:layout_marginEnd="2dp"
-            android:text="@string/SearchButton"
             android:onClick="@{ () -> viewModel.chatCompletion()}"
+            android:text="@string/SearchButton"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ChatResponse" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
             android:id="@+id/SettingsButton"
@@ -71,19 +73,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/ic_menu_manage" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/messages"
-            android:layout_width="0dp"
-            android:layout_height="775dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="50dp"
-            app:layout_constraintBottom_toTopOf="@+id/QuestionField"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

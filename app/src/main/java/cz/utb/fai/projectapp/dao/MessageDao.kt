@@ -1,4 +1,4 @@
-package cz.utb.fai.projectapp.messagedao
+package cz.utb.fai.projectapp.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -11,6 +11,6 @@ interface MessageDao {
     @Insert
     suspend fun insert(message: MessageEntity)
 
-    @Query("SELECT * FROM messages ORDER BY timestamp DESC")
+    @Query("SELECT * FROM messages ORDER BY timestamp ASC")
     fun getAllMessages(): LiveData<List<MessageEntity>>
 }

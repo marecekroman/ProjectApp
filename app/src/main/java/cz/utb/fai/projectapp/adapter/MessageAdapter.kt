@@ -2,7 +2,6 @@ package cz.utb.fai.projectapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import cz.utb.fai.projectapp.databinding.ReceivedMessageItemBinding
 import cz.utb.fai.projectapp.databinding.SentMessageItemBinding
@@ -45,14 +44,14 @@ class MessageAdapter(private var messages: List<MessageEntity>) : RecyclerView.A
 
     class SentMessageViewHolder(private val binding: SentMessageItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(message: MessageEntity) {
-            binding.message = message
+            binding.messageSent = message
             binding.executePendingBindings()
         }
     }
 
     class ReceivedMessageViewHolder(private val binding: ReceivedMessageItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(message: MessageEntity) {
-            binding.message = message
+            binding.messageReceived = message
             binding.executePendingBindings()
         }
     }

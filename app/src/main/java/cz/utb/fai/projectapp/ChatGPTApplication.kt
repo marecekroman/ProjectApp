@@ -1,4 +1,4 @@
-package cz.utb.fai.projectapp.view
+package cz.utb.fai.projectapp
 
 import android.app.Application
 import androidx.room.Room

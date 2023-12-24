@@ -1,11 +1,9 @@
 package cz.utb.fai.projectapp.mainViewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import cz.utb.fai.projectapp.api.ChatGPTNetwork.Message
 import cz.utb.fai.projectapp.database.AppDatabase
 import cz.utb.fai.projectapp.model.MessageEntity
 import cz.utb.fai.projectapp.repository.ChatRepository
@@ -24,7 +22,6 @@ class MainViewModel(
     val questionMutable = MutableLiveData<String>()
     val showLoading = MutableLiveData<Boolean>()
     val processToSettings = MutableLiveData<Boolean>()
-    var responseMutable = MutableLiveData<String>()
 
     // Accessing the DAO to get all messages
     val allMessages: LiveData<List<MessageEntity>> = database.messageDao().getAllMessages()
@@ -56,11 +53,8 @@ class MainViewModel(
                     ?.message
                     ?.content.toString().trim()
                 response?.let {
-                    responseMutable.postValue(it)
                     insertMessage(MessageEntity(text = question, isSender = true, timestamp = System.currentTimeMillis()))
                     insertMessage(MessageEntity(text = it, isSender = false, timestamp = System.currentTimeMillis()))
-                    responseMutable.postValue(it)
-                    Log.d("Error", it)
                 }
                 questionMutable.postValue("")
             }
