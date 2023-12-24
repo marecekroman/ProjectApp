@@ -1,4 +1,4 @@
-package cz.utb.fai.projectapp.api.ChatResponse
+package cz.utb.fai.projectapp.api.ChatGPTNetwork
 
 data class ChatResponse(
     val choices: List<Choice>

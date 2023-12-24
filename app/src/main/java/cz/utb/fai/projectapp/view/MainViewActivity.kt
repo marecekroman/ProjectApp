@@ -54,11 +54,11 @@ class MainViewActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val app = application as ChatGPTApplication
-        //viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel = ViewModelProvider(this, ChatGPTModelFactory(app.repository))
             .get(MainViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
 
 
     }

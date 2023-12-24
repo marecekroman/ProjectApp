@@ -1,17 +1,17 @@
 package cz.utb.fai.projectapp.api
 
-import cz.utb.fai.projectapp.api.ChatResponse.ChatRequest
-import cz.utb.fai.projectapp.api.ChatResponse.ChatResponse
-import retrofit2.Call
+import cz.utb.fai.projectapp.api.ChatGPTNetwork.ChatRequest
+import cz.utb.fai.projectapp.api.ChatGPTNetwork.ChatResponse
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
 interface ChatGPTService {
 
-    @POST("chat/completions")
-    fun chatCompletion(
-        @Body chatRequest: ChatRequest,
-        @Header("Content-Type") contentType : String = "application/json",
-        @Header("Authorization") authorization : String = "Bearer "
-    ) : Call<ChatResponse>
+   @POST("chat/completions")
+   suspend fun chatCompletion(
+      @Body chatRequest: ChatRequest,
+      @Header("Content-Type") contentType : String = "application/json",
+      @Header("Authorization") authorization : String = "Bearer "
+      ): Response<ChatResponse>
 }

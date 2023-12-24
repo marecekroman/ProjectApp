@@ -1,6 +1,5 @@
 package cz.utb.fai.projectapp.mainViewModel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,7 +16,7 @@ class MainViewModel(
     private val _isReady = MutableStateFlow(false)
     val isReady = _isReady.asStateFlow()
     val questionMutable = MutableLiveData<String>()
-    val showHint = MutableLiveData<Boolean>()
+    val showLoading = MutableLiveData<Boolean>()
     val processToSettings = MutableLiveData<Boolean>()
     var responseMutable = MutableLiveData<String>()
 
@@ -36,18 +35,19 @@ class MainViewModel(
     fun chatCompletion(){
         if (questionMutable.value != null && !questionMutable.value!!.isEmpty()) {
             viewModelScope.launch {
-                repository.chatCompletion(questionMutable.value.toString())
-                responseMutable.value = repository.chatResponse.value.toString()
+                responseMutable.postValue(repository.chatCompletion(questionMutable.value.toString())
+                    ?.choices
+                    ?.first()
+                    ?.message
+                    ?.content.toString())
             }
-            Log.d("Message: ", questionMutable.value.toString())
-            
         } else {
             //
-            showHint.value = true
+            showLoading.value = true
         }
     }
 
-    fun hideHintAndNotFound () {
-        showHint.value = false
+    fun waitForResponse () {
+        showLoading.value = false
     }
 }
