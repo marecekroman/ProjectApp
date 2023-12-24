@@ -8,6 +8,8 @@ import android.view.animation.OvershootInterpolator
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import cz.utb.fai.projectapp.adapter.MessageAdapter
 import cz.utb.fai.projectapp.model.ChatGPTModelFactory
 import cz.utb.fai.projectapp.databinding.ActivityviewMainBinding
 import cz.utb.fai.projectapp.mainViewModel.MainViewModel
@@ -16,6 +18,7 @@ class MainViewActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityviewMainBinding
     private lateinit var viewModel: MainViewModel
+    private lateinit var adapter: MessageAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
        super.onCreate(savedInstanceState)
 
@@ -54,12 +57,25 @@ class MainViewActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val app = application as ChatGPTApplication
-        viewModel = ViewModelProvider(this, ChatGPTModelFactory(app.repository))
+        viewModel = ViewModelProvider(this, ChatGPTModelFactory(app.repository, app.database))
             .get(MainViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        // Initialize the adapter with an empty list or initial data
+        adapter = MessageAdapter(emptyList())
+        binding.messages.adapter = adapter // Assuming 'yourRecyclerView' is in your layout
 
+        // Setup RecyclerView layout manager
+        binding.messages.layoutManager = LinearLayoutManager(this)
 
+        // Initialize ViewModel and observe LiveData
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel.allMessages.observe(this, { messages ->
+            adapter.updateData(messages)
+        })
     }
+
+
+
 }

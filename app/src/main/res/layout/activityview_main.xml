@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         tools:context=".view.MainViewActivity">
 
-        <TextView
+         <TextView
             android:id="@+id/ChatResponse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,11 +36,13 @@
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
             android:layout_marginBottom="2dp"
+            android:backgroundTintMode="src_in"
             android:ems="10"
             android:hint="@string/QuestionField"
             android:inputType="textMultiLine"
-            android:text="@={ viewModel.questionMutable}"
             android:minHeight="48dp"
+            android:text="@={ viewModel.questionMutable}"
+            android:background="@drawable/rounded_edittext_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/SendButton"
             app:layout_constraintStart_toStartOf="parent" />
@@ -68,6 +70,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/ic_menu_manage" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messages"
+            android:layout_width="0dp"
+            android:layout_height="775dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toTopOf="@+id/QuestionField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

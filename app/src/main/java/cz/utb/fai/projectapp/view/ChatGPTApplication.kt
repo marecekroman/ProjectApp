@@ -1,7 +1,9 @@
 package cz.utb.fai.projectapp.view
 
 import android.app.Application
+import androidx.room.Room
 import cz.utb.fai.projectapp.api.ChatGPTService
+import cz.utb.fai.projectapp.database.AppDatabase
 import cz.utb.fai.projectapp.repository.ChatRepository
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -17,6 +19,13 @@ class ChatGPTApplication : Application() {
             .build()
 
         retrofit.create(ChatGPTService::class.java)
+    }
+
+    val database: AppDatabase by lazy {
+        Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "message-database"
+        ).build()
     }
 
     val repository: ChatRepository by lazy {
