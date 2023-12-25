@@ -3,9 +3,10 @@ package cz.utb.fai.projectapp.model
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import cz.utb.fai.projectapp.database.AppDatabase
-import cz.utb.fai.projectapp.mainViewModel.MainViewModel
+import cz.utb.fai.projectapp.viewModel.MainViewModel
 import cz.utb.fai.projectapp.repository.ChatRepository
 
+@Suppress("UNCHECKED_CAST")
 class ChatGPTModelFactory(
     private val repository: ChatRepository,
     private val database: AppDatabase

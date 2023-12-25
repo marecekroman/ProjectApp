@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="Theme.Animated" parent="Base.Theme.ProjectApp">
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/animated_logo</item>
     </style>

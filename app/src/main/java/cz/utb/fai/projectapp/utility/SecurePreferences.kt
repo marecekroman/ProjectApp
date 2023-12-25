@@ -9,6 +9,19 @@ object SecurePreferences {
 
     private const val PREFS_FILENAME = "secure_prefs"
     private const val API_KEY = "api_key"
+    private const val PREFERENCES_FILE_KEY = "cz.utb.fai.projectapp.utility"
+    private const val MODEL_KEY = "model_key"
+    private const val DEFAULT_MODEL = "GPT-3.5-turbo"
+
+    fun saveModel(context: Context, model: String) {
+        val prefs = context.getSharedPreferences(PREFERENCES_FILE_KEY, Context.MODE_PRIVATE)
+        prefs.edit().putString(MODEL_KEY, model).apply()
+    }
+
+    fun getModel(context: Context): String {
+        val prefs = context.getSharedPreferences(PREFERENCES_FILE_KEY, Context.MODE_PRIVATE)
+        return prefs.getString(MODEL_KEY, DEFAULT_MODEL) ?: DEFAULT_MODEL
+    }
 
     private fun getEncryptedSharedPreferences(context: Context): SharedPreferences {
         val masterKey = MasterKey.Builder(context)

@@ -15,13 +15,14 @@ import cz.utb.fai.projectapp.ChatGPTApplication
 import cz.utb.fai.projectapp.adapter.MessageAdapter
 import cz.utb.fai.projectapp.model.ChatGPTModelFactory
 import cz.utb.fai.projectapp.databinding.ActivityviewMainBinding
-import cz.utb.fai.projectapp.mainViewModel.MainViewModel
+import cz.utb.fai.projectapp.viewModel.MainViewModel
 
 class MainViewActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityviewMainBinding
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: MessageAdapter
+    private lateinit var layoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
        super.onCreate(savedInstanceState)
@@ -72,6 +73,8 @@ class MainViewActivity : AppCompatActivity() {
 
         // Setup RecyclerView layout manager
         binding.messages.layoutManager = LinearLayoutManager(this)
+        layoutManager = LinearLayoutManager(this)
+        binding.messages.layoutManager = layoutManager
 
         viewModel.processToSettings.observe(this) { value ->
             if (value) {
@@ -85,12 +88,18 @@ class MainViewActivity : AppCompatActivity() {
         // Initialize ViewModel and observe LiveData
         viewModel.allMessages.observe(this, { messages ->
             adapter.updateData(messages)
+            scrollToBottom()
         })
         // Observe apiError
         viewModel.apiError.observe(this) { errorMessage ->
             if (errorMessage.isNotEmpty()) {
                 Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+    private fun scrollToBottom() {
+        adapter.itemCount.takeIf { it > 0 }?.let {
+            layoutManager.scrollToPosition(it - 1)
         }
     }
 }

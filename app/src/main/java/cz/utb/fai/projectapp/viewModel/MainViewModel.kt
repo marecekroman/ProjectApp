@@ -1,4 +1,4 @@
-package cz.utb.fai.projectapp.mainViewModel
+package cz.utb.fai.projectapp.viewModel
 
 import android.content.Context
 import android.widget.Toast
@@ -9,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import cz.utb.fai.projectapp.database.AppDatabase
 import cz.utb.fai.projectapp.model.MessageEntity
 import cz.utb.fai.projectapp.repository.ChatRepository
-import cz.utb.fai.projectapp.utility.SecurePreferences
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -51,13 +50,7 @@ class MainViewModel(
         val question = questionMutable.value
         if (!question.isNullOrEmpty()) {
             viewModelScope.launch {
-                val apiKey = SecurePreferences.getApiKey(context) ?: return@launch
-                if (apiKey.isEmpty()) {
-                    Toast.makeText(context, "API Key is not set", Toast.LENGTH_SHORT).show()
-                    return@launch
-                }
-
-                val result = repository.chatCompletion(question.trim(), apiKey)
+                val result = repository.chatCompletion(question.trim())
                 result.onSuccess { chatResponse ->
                     chatResponse?.choices?.firstOrNull()?.message?.content?.let { response ->
                         insertMessage(MessageEntity(text = question, isSender = true, timestamp = System.currentTimeMillis()))

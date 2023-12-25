@@ -22,7 +22,8 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="textDelete">Delete chat history</string>
     <string name="btnDelete">Delete</string>
-    <string name="btnSave">Save</string>
+    <string name="btnSaveKey">Save Key</string>
     <string name="btnAbout">About</string>
     <string name="apiKey">Paste CHATGPT API key</string>
+    <string name="btnSaveModel">Select model</string>
 </resources>

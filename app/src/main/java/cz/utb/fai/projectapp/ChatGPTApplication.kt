@@ -29,10 +29,6 @@ class ChatGPTApplication : Application() {
     }
 
     val repository: ChatRepository by lazy {
-        ChatRepository(apiService)
-    }
-
-    override fun onCreate() {
-        super.onCreate()
+        ChatRepository(apiService, applicationContext)
     }
 }

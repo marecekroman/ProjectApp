@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="cz.utb.fai.projectapp.mainViewModel.MainViewModel" />
+            type="cz.utb.fai.projectapp.viewModel.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,40 +38,46 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
-            android:layout_marginBottom="2dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/rounded_edittext_background"
             android:backgroundTintMode="src_in"
             android:ems="10"
             android:hint="@string/QuestionField"
             android:inputType="textMultiLine"
             android:minHeight="48dp"
             android:text="@={ viewModel.questionMutable}"
-            android:background="@drawable/rounded_edittext_background"
+            android:textColor="?attr/colorOnPrimary"
+            android:textColorHint="?attr/colorOnPrimary"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/SendButton"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="Autofill" />
 
         <Button
             android:id="@+id/SendButton"
             android:layout_width="88dp"
-            android:layout_height="48dp"
+            android:layout_height="58dp"
             android:layout_marginEnd="2dp"
             android:onClick="@{ () -> viewModel.chatCompletion(context)}"
             android:text="@string/SearchButton"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/QuestionField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/QuestionField" />
 
-        <Button
+        <ImageButton
             android:id="@+id/SettingsButton"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginTop="3dp"
             android:layout_marginEnd="3dp"
+            app:tint="?attr/colorOnPrimary"
+            android:background="@drawable/circle_button_background"
             android:contentDescription="@string/SettingsButton"
             android:onClick="@{ () -> viewModel.toSettings() }"
-            app:icon="@android:drawable/ic_menu_preferences"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_manage" />
+            android:src="@drawable/icons8_settings" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
