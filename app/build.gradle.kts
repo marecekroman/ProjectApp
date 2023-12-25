@@ -78,4 +78,7 @@ dependencies {
 
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
+
+    //Security implementation
+    implementation ("androidx.security:security-crypto:1.1.0-alpha06")
 }

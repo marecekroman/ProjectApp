@@ -6,4 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".view.SettingsActivity">
 
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="91dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:text="@string/btnDelete"
+        app:layout_constraintBottom_toBottomOf="@+id/textDelete"
+        app:layout_constraintStart_toEndOf="@+id/textDelete"
+        app:layout_constraintTop_toTopOf="@+id/textDelete" />
+
+    <Button
+        android:id="@+id/btnSaveKey"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/btnSave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/apiKey" />
+
+    <EditText
+        android:id="@+id/apiKey"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:hint="@string/apiKey"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDelete" />
+
+    <TextView
+        android:id="@+id/textDelete"
+        android:layout_width="199dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="120dp"
+        android:text="@string/textDelete"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnAbout"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="70dp"
+        android:text="@string/btnAbout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSaveKey" />
 </androidx.constraintlayout.widget.ConstraintLayout>

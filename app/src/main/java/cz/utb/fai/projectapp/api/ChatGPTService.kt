@@ -12,6 +12,6 @@ interface ChatGPTService {
    suspend fun chatCompletion(
       @Body chatRequest: ChatRequest,
       @Header("Content-Type") contentType : String = "application/json",
-      @Header("Authorization") authorization : String = "Bearer "
+      @Header("Authorization") authorization : String
       ): Response<ChatResponse>
 }

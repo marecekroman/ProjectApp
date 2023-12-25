@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.OvershootInterpolator
+import android.widget.Toast
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
@@ -21,6 +22,7 @@ class MainViewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityviewMainBinding
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: MessageAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
        super.onCreate(savedInstanceState)
 
@@ -73,7 +75,7 @@ class MainViewActivity : AppCompatActivity() {
 
         viewModel.processToSettings.observe(this) { value ->
             if (value) {
-                // go to detail activity
+                // go to settings activity
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
                 viewModel.processToSettings.value = false
@@ -84,5 +86,11 @@ class MainViewActivity : AppCompatActivity() {
         viewModel.allMessages.observe(this, { messages ->
             adapter.updateData(messages)
         })
+        // Observe apiError
+        viewModel.apiError.observe(this) { errorMessage ->
+            if (errorMessage.isNotEmpty()) {
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

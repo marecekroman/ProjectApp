@@ -1,5 +1,7 @@
 package cz.utb.fai.projectapp.mainViewModel
 
+import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import cz.utb.fai.projectapp.database.AppDatabase
 import cz.utb.fai.projectapp.model.MessageEntity
 import cz.utb.fai.projectapp.repository.ChatRepository
+import cz.utb.fai.projectapp.utility.SecurePreferences
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,7 +23,8 @@ class MainViewModel(
     private val _isReady = MutableStateFlow(false)
     val isReady = _isReady.asStateFlow()
     val questionMutable = MutableLiveData<String>()
-    val showLoading = MutableLiveData<Boolean>()
+    private val _apiError = MutableLiveData<String>()
+    val apiError: LiveData<String> = _apiError
     val processToSettings = MutableLiveData<Boolean>()
 
     // Accessing the DAO to get all messages
@@ -43,27 +47,30 @@ class MainViewModel(
         processToSettings.value = true
     }
 
-    fun chatCompletion(){
+    fun chatCompletion(context: Context) {
         val question = questionMutable.value
         if (!question.isNullOrEmpty()) {
             viewModelScope.launch {
-                val response = repository.chatCompletion(question.trim())
-                    ?.choices
-                    ?.first()
-                    ?.message
-                    ?.content.toString().trim()
-                response?.let {
-                    insertMessage(MessageEntity(text = question, isSender = true, timestamp = System.currentTimeMillis()))
-                    insertMessage(MessageEntity(text = it, isSender = false, timestamp = System.currentTimeMillis()))
+                val apiKey = SecurePreferences.getApiKey(context) ?: return@launch
+                if (apiKey.isEmpty()) {
+                    Toast.makeText(context, "API Key is not set", Toast.LENGTH_SHORT).show()
+                    return@launch
                 }
+
+                val result = repository.chatCompletion(question.trim(), apiKey)
+                result.onSuccess { chatResponse ->
+                    chatResponse?.choices?.firstOrNull()?.message?.content?.let { response ->
+                        insertMessage(MessageEntity(text = question, isSender = true, timestamp = System.currentTimeMillis()))
+                        insertMessage(MessageEntity(text = response, isSender = false, timestamp = System.currentTimeMillis()))
+                    }
+                }.onFailure { exception ->
+                    _apiError.postValue(exception.message)
+                }
+
                 questionMutable.postValue("")
             }
         } else {
-            showLoading.value = true
+            Toast.makeText(context, "Type question", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    fun waitForResponse() {
-        showLoading.value = false
     }
 }
