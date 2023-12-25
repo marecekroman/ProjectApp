@@ -1,84 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.SettingsActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/textDelete"
-        android:layout_width="199dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="120dp"
-        android:text="@string/textDelete"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="106dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="40dp"
-        android:text="@string/btnDelete"
-        app:layout_constraintBottom_toBottomOf="@+id/textDelete"
-        app:layout_constraintStart_toEndOf="@+id/textDelete"
-        app:layout_constraintTop_toTopOf="@+id/textDelete" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.SettingsActivity">
+
+        <TextView
+            android:id="@+id/textDelete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="150dp"
+            android:text="@string/textDelete"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="106dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="40dp"
+            android:text="@string/btnDelete"
+            app:layout_constraintBottom_toBottomOf="@+id/textDelete"
+            app:layout_constraintStart_toEndOf="@+id/textDelete"
+            app:layout_constraintTop_toTopOf="@+id/textDelete" />
 
 
-    <Spinner
-        android:id="@+id/modelSelector"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
-        android:entries="@array/model_options"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDelete" />
+        <Spinner
+            android:id="@+id/modelSelector"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="50dp"
+            android:entries="@array/model_options"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textDelete" />
 
-    <Button
-        android:id="@+id/btnSaveModel"
-        android:layout_width="106dp"
-        android:layout_height="60dp"
-        android:text="@string/btnSaveModel"
-        app:layout_constraintBottom_toBottomOf="@+id/modelSelector"
-        app:layout_constraintEnd_toEndOf="@+id/btnDelete"
-        app:layout_constraintStart_toStartOf="@+id/btnDelete"
-        app:layout_constraintTop_toTopOf="@+id/modelSelector" />
+        <Button
+            android:id="@+id/btnSaveModel"
+            android:layout_width="106dp"
+            android:layout_height="60dp"
+            android:text="@string/btnSaveModel"
+            app:layout_constraintBottom_toBottomOf="@+id/modelSelector"
+            app:layout_constraintEnd_toEndOf="@+id/btnDelete"
+            app:layout_constraintStart_toStartOf="@+id/btnDelete"
+            app:layout_constraintTop_toTopOf="@+id/modelSelector" />
 
-    <EditText
-        android:id="@+id/apiKey"
-        android:layout_width="210dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="60dp"
-        android:ems="10"
-        android:hint="@string/apiKey"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/modelSelector"
-        tools:ignore="Autofill" />
+        <EditText
+            android:id="@+id/apiKey"
+            android:layout_width="210dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="60dp"
+            android:ems="10"
+            android:hint="@string/apiKey"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/modelSelector"
+            tools:ignore="Autofill" />
 
-    <Button
-        android:id="@+id/btnSaveKey"
-        android:layout_width="106dp"
-        android:layout_height="60dp"
-        android:text="@string/btnSaveKey"
-        app:layout_constraintBottom_toBottomOf="@+id/apiKey"
-        app:layout_constraintEnd_toEndOf="@+id/btnSaveModel"
-        app:layout_constraintStart_toStartOf="@+id/btnSaveModel"
-        app:layout_constraintTop_toTopOf="@+id/apiKey" />
+        <Button
+            android:id="@+id/btnSaveKey"
+            android:layout_width="106dp"
+            android:layout_height="60dp"
+            android:text="@string/btnSaveKey"
+            app:layout_constraintBottom_toBottomOf="@+id/apiKey"
+            app:layout_constraintEnd_toEndOf="@+id/btnSaveModel"
+            app:layout_constraintStart_toStartOf="@+id/btnSaveModel"
+            app:layout_constraintTop_toTopOf="@+id/apiKey" />
 
-    <Button
-        android:id="@+id/btnAbout"
-        android:layout_width="109dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="70dp"
-        android:text="@string/btnAbout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/apiKey" />
+        <Button
+            android:id="@+id/btnAbout"
+            android:layout_width="109dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/btnAbout"
+            app:layout_constraintEnd_toEndOf="@+id/btnSaveKey"
+            app:layout_constraintStart_toStartOf="@+id/apiKey"
+            app:layout_constraintTop_toBottomOf="@+id/apiKey" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

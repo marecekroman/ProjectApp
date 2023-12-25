@@ -1,29 +1,17 @@
 <resources>
     <string name="app_name">ProjectApp</string>
-    <string name="ChatResponse">ChatGPT response</string>
     <string name="QuestionField">Enter question</string>
     <string name="SearchButton">Send</string>
     <string name="SettingsButton">SettingsButton</string>
     <string name="title_activity_settings">SettingsActivity</string>
-
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <string name="title_activity_about">AboutActivity</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="textDelete">Delete chat history</string>
     <string name="btnDelete">Delete</string>
     <string name="btnSaveKey">Save Key</string>
     <string name="btnAbout">About</string>
     <string name="apiKey">Paste CHATGPT API key</string>
     <string name="btnSaveModel">Select model</string>
+    <string name="textAbout">This application was made by Roman Marecek as a school project</string>
 </resources>

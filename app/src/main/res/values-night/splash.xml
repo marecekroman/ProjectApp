@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="Theme.ProjectApp.MySplash" parent="Theme.SplashScreen">
-    <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
-    <item name="windowSplashScreenBackground">#000000</item>
-    <item name="postSplashScreenTheme">@style/Theme.ProjectApp</item>
-</style></resources>

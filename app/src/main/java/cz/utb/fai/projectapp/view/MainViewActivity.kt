@@ -17,88 +17,113 @@ import cz.utb.fai.projectapp.model.ChatGPTModelFactory
 import cz.utb.fai.projectapp.databinding.ActivityviewMainBinding
 import cz.utb.fai.projectapp.viewModel.MainViewModel
 
+// Define ViewActivity class that extends AppCompatActivity
 class MainViewActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityviewMainBinding
-    private lateinit var viewModel: MainViewModel
-    private lateinit var adapter: MessageAdapter
-    private lateinit var layoutManager: LinearLayoutManager
+    // Declare variables for binding, viewModel, adapter, and layoutManager
+ private lateinit var binding: ActivityviewMainBinding
+ private lateinit var viewModel: MainViewModel
+ private lateinit var adapter: MessageAdapter
+ private lateinit var layoutManager: LinearLayoutManager
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-       super.onCreate(savedInstanceState)
+ override fun onCreate(savedInstanceState: Bundle?) {
 
-        installSplashScreen().apply {
-            setKeepOnScreenCondition {
-                !viewModel.isReady.value
-            }
+    super.onCreate(savedInstanceState)
 
-            setOnExitAnimationListener { screen ->
-                val zoomX = ObjectAnimator.ofFloat(
-                    screen.iconView,
-                    View.SCALE_X,
-                    0.4f,
-                    0.0f
-                )
-                zoomX.interpolator = OvershootInterpolator()
-                zoomX.duration = 800L
-                zoomX.doOnEnd { screen.remove() }
+    // Install splash screen and set conditions
+    installSplashScreen().apply {
+        setKeepOnScreenCondition {
 
-                val zoomY = ObjectAnimator.ofFloat(
-                    screen.iconView,
-                    View.SCALE_Y,
-                    0.4f,
-                    0.0f
-                )
-                zoomY.interpolator = OvershootInterpolator()
-                zoomY.duration = 800L
-                zoomY.doOnEnd { screen.remove() }
-
-                zoomX.start()
-                zoomY.start()
-            }
+            // Keep the splash screen until the viewModel is ready
+            !viewModel.isReady.value
         }
 
-        binding = ActivityviewMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setOnExitAnimationListener { screen ->
+            // Set exit animation for the splash screen
+            val zoomX = ObjectAnimator.ofFloat(
+                screen.iconView,
+                View.SCALE_X,
+                0.4f,
+                0.0f
+            )
+            zoomX.interpolator = OvershootInterpolator()
+            zoomX.duration = 800L
+            zoomX.doOnEnd { screen.remove() }
 
-        val app = application as ChatGPTApplication
-        viewModel = ViewModelProvider(this, ChatGPTModelFactory(app.repository, app.database))
-            .get(MainViewModel::class.java)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+            val zoomY = ObjectAnimator.ofFloat(
+                screen.iconView,
+                View.SCALE_Y,
+                0.4f,
+                0.0f
+            )
+            zoomY.interpolator = OvershootInterpolator()
+            zoomY.duration = 800L
+            zoomY.doOnEnd { screen.remove() }
 
-        // Initialize the adapter with an empty list or initial data
-        adapter = MessageAdapter(emptyList())
-        binding.messages.adapter = adapter
-
-        // Setup RecyclerView layout manager
-        binding.messages.layoutManager = LinearLayoutManager(this)
-        layoutManager = LinearLayoutManager(this)
-        binding.messages.layoutManager = layoutManager
-
-        viewModel.processToSettings.observe(this) { value ->
-            if (value) {
-                // go to settings activity
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
-                viewModel.processToSettings.value = false
-            }
-        }
-
-        // Initialize ViewModel and observe LiveData
-        viewModel.allMessages.observe(this, { messages ->
-            adapter.updateData(messages)
-            scrollToBottom()
-        })
-        // Observe apiError
-        viewModel.apiError.observe(this) { errorMessage ->
-            if (errorMessage.isNotEmpty()) {
-                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-            }
+            // Start the animations
+            zoomX.start()
+            zoomY.start()
         }
     }
+
+    // Inflate the main activity view
+    binding = ActivityviewMainBinding.inflate(layoutInflater)
+    setContentView(binding.root)
+
+    // Get the application instance and initialize the viewModel
+    val app = application as ChatGPTApplication
+
+    viewModel = ViewModelProvider(this, ChatGPTModelFactory(app.repository, app.database))
+        .get(MainViewModel::class.java)
+
+    binding.viewModel = viewModel
+    binding.lifecycleOwner = this
+
+    // Initialize the adapter with an empty list
+    adapter = MessageAdapter(emptyList())
+    binding.messages.adapter = adapter
+
+    // Setup RecyclerView layout manager
+    binding.messages.layoutManager = LinearLayoutManager(this)
+    layoutManager = LinearLayoutManager(this)
+    binding.messages.layoutManager = layoutManager
+
+    // Observe the processToSettings LiveData
+    viewModel.processToSettings.observe(this) { value ->
+
+        if (value) {
+
+            // If true, start the SettingsActivity
+            val intent = Intent(this, SettingsActivity::class.java)
+
+            startActivity(intent)
+            viewModel.processToSettings.value = false
+        }
+    }
+
+    // Initialize ViewModel and observe allMessages LiveData
+    viewModel.allMessages.observe(this) { messages ->
+
+        // Update the adapter data and scroll to the bottom
+        adapter.updateData(messages)
+        scrollToBottom()
+    }
+
+     // Observe apiError LiveData
+    viewModel.apiError.observe(this) { errorMessage ->
+
+        if (errorMessage.isNotEmpty()) {
+
+            // If there's an error, show a toast message
+            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+        }
+    }
+}
+    // Function to scroll to the bottom of the messages
     private fun scrollToBottom() {
+
         adapter.itemCount.takeIf { it > 0 }?.let {
+
             layoutManager.scrollToPosition(it - 1)
         }
     }
