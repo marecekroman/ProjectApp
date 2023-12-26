@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import cz.utb.fai.projectapp.R
 
 // Define AboutActivity class that extends AppCompatActivity
