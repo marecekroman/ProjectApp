@@ -118,7 +118,32 @@ class MainViewActivity : AppCompatActivity() {
             Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
         }
     }
+
+     // Observing the typing status of the viewModel
+     viewModel.isTyping.observe(this) { isTyping ->
+         // If the user is typing
+         if (isTyping) {
+             // Make the animation view visible
+             binding.animationView.visibility = View.VISIBLE
+             // Start the animation
+             binding.animationView.playAnimation()
+         } else {
+             // If the user is not typing, cancel the animation
+             binding.animationView.cancelAnimation()
+             // And make the animation view gone
+             binding.animationView.visibility = View.GONE
+         }
+     }
 }
+
+    // This function is called when the object is destroyed
+    override fun onDestroy() {
+        // Cancel any ongoing animation on the animation view
+        binding.animationView.cancelAnimation()
+        // Call the parent class's onDestroy method
+        super.onDestroy()
+    }
+
     // Function to scroll to the bottom of the messages
     private fun scrollToBottom() {
 

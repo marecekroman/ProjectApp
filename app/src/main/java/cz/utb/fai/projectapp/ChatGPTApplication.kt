@@ -6,20 +6,35 @@ import cz.utb.fai.projectapp.api.ChatGPTService
 import cz.utb.fai.projectapp.database.AppDatabase
 import cz.utb.fai.projectapp.model.ChatGPTModelFactory
 import cz.utb.fai.projectapp.repository.ChatRepository
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 // Define a class that extends the Application class
 class ChatGPTApplication : Application() {
 
     // Define the base URL for the API
     private val BASE_URL = "https://api.openai.com/v1/"
+
+    // Create a new OkHttpClient instance
+    val okHttpClient = OkHttpClient.Builder()
+        // Set the connection timeout to 30 seconds
+        .connectTimeout(30, TimeUnit.SECONDS)
+        // Set the read timeout to 30 seconds
+        .readTimeout(30, TimeUnit.SECONDS)
+        // Set the write timeout to 30 seconds
+        .writeTimeout(30, TimeUnit.SECONDS)
+        // Build the OkHttpClient instance
+        .build()
+
     // Define a lazy-initialized variable for the API service
     val apiService: ChatGPTService by lazy {
 
         // Create a Retrofit builder
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL) // Set the base URL for the API
+            .client(okHttpClient) // This line sets the client for the request to be the okHttpClient
             .addConverterFactory(GsonConverterFactory.create()) // Use Gson for JSON serialization/deserialization
             .build() // Build the Retrofit instance
 

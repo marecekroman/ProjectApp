@@ -81,4 +81,8 @@ dependencies {
 
     //Security implementation
     implementation ("androidx.security:security-crypto:1.1.0-alpha06")
+
+    //Lottie
+    val lottieVersion = "3.4.0"
+    implementation ("com.airbnb.android:lottie:$lottieVersion")
 }

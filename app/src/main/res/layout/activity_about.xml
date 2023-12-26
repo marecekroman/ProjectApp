@@ -7,12 +7,72 @@
     tools:context=".view.AboutActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/aboutTextView"
+        android:layout_width="411dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="5dp"
         android:text="@string/textAbout"
-        android:textSize="35sp"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/sources"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/sources"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/aboutTextView"
+        app:layout_constraintStart_toStartOf="@+id/aboutTextView"
+        app:layout_constraintTop_toBottomOf="@+id/aboutTextView" />
+
+    <TextView
+        android:id="@+id/chatGPTIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/linkChatGPTIcon"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/sources"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="@+id/sources"
+        app:layout_constraintTop_toBottomOf="@+id/sources" />
+
+    <TextView
+        android:id="@+id/settingsIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/linkSettingsIcon"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/sources"
+        app:layout_constraintStart_toStartOf="@+id/sources"
+        app:layout_constraintTop_toBottomOf="@+id/chatGPTIcon" />
+
+    <TextView
+        android:id="@+id/sendIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/linkSendIcon"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/sources"
+        app:layout_constraintStart_toStartOf="@+id/sources"
+        app:layout_constraintTop_toBottomOf="@+id/settingsIcon" />
+
+    <TextView
+        android:id="@+id/jsonAnimation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/linkJSONAnimation"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/sources"
+        app:layout_constraintStart_toStartOf="@+id/sources"
+        app:layout_constraintTop_toBottomOf="@+id/sendIcon" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,19 +22,30 @@ class MainViewModel(
 
     // Declare a private mutable state flow variable _isReady with initial value false
     private val _isReady = MutableStateFlow(false)
+
     // Declare a public state flow variable isReady that mirrors _isReady
     val isReady = _isReady.asStateFlow()
+
     // Declare a mutable live data variable questionMutable of type String
     val questionMutable = MutableLiveData<String>()
+
     // Declare a private mutable live data variable _apiError of type String
     private val _apiError = MutableLiveData<String>()
+
     // Declare a public live data variable apiError that mirrors _apiError
     val apiError: LiveData<String> = _apiError
+
     // Declare a mutable live data variable processToSettings of type Boolean
     val processToSettings = MutableLiveData<Boolean>()
 
     // Access the DAO to get all messages and assign it to the variable allMessages
     val allMessages: LiveData<List<MessageEntity>> = database.messageDao().getAllMessages()
+
+    // Declaring a private mutable live data variable _isTyping and initializing it with false
+    private val _isTyping = MutableLiveData<Boolean>(false)
+
+    // Declaring a public live data variable isTyping and assigning it the value of _isTyping
+    val isTyping: LiveData<Boolean> = _isTyping
 
     // Declare a function insertMessage that takes a MessageEntity object as parameter and inserts it into the database
     fun insertMessage(message: MessageEntity) {
@@ -65,6 +76,10 @@ class MainViewModel(
         // Check if question is not null or empty
         if (!question.isNullOrEmpty()) {
             viewModelScope.launch {
+
+                // Start the typing animation
+                startTypingAnimation()
+
                 // Trim the question and pass it to the chatCompletion function of the repository
                 val result = repository.chatCompletion(question.trim())
                 // Handle the success case
@@ -80,6 +95,9 @@ class MainViewModel(
                     _apiError.postValue(exception.message)
                 }
 
+                // Stop the typing animation
+                stopTypingAnimation()
+
                 // Reset the value of questionMutable
                 questionMutable.postValue("")
             }
@@ -94,5 +112,17 @@ class MainViewModel(
         viewModelScope.launch {
             database.messageDao().deleteAllMessages()
         }
+    }
+
+    // This function starts the typing animation
+    fun startTypingAnimation() {
+        // Post a value of true to _isTyping to indicate that typing has started
+        _isTyping.postValue(true)
+    }
+
+    // This function stops the typing animation
+    fun stopTypingAnimation() {
+        // Post a value of false to _isTyping to indicate that typing has stopped
+        _isTyping.postValue(false)
     }
 }

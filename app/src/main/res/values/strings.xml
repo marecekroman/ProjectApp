@@ -14,4 +14,26 @@
     <string name="apiKey">Paste CHATGPT API key</string>
     <string name="btnSaveModel">Select model</string>
     <string name="textAbout">This application was made by Roman Marecek as a school project</string>
+    <string name="sources">Sources:</string>
+        <!-- Other strings -->
+    <string name="linkChatGPTIcon">
+        <![CDATA[
+            <a href="https://icons8.com/icon/TlnNBAQWZ6Vv/chatgpt">ChatGPT</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+        ]]>
+    </string>
+    <string name="linkSettingsIcon">
+        <![CDATA[
+            <a target="_blank" href="https://icons8.com/icon/2969/settings">Settings</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+        ]]>
+    </string>
+    <string name="linkSendIcon">
+        <![CDATA[
+            <a target="_blank" href="https://www.svgrepo.com/svg/30442/send">Send</a> icon by <a target="_blank" href="https://www.svgrepo.com">SVGRepo</a>
+        ]]>
+    </string>
+    <string name="linkJSONAnimation">
+        <![CDATA[
+            <a target="_blank" href="https://github.com/Coding-Meet/ChatGPT-App/blob/e875624a44e459fa7825e7d6def39b1f34dcec44/raw/typing_animation.json">Typing animation</a> by <a target="_blank" href="https://github.com/Coding-Meet">Coding-Meet</a>
+        ]]>
+    </string>
 </resources>

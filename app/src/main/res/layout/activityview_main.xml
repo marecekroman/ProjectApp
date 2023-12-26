@@ -23,14 +23,28 @@
             android:layout_marginStart="1dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="1dp"
-            android:layout_marginBottom="2dp"
-            app:layout_constraintBottom_toTopOf="@+id/QuestionField"
+            android:layout_marginBottom="5dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/animationView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layoutManager = "androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/SettingsButton">
-    </androidx.recyclerview.widget.RecyclerView>
+            app:layout_constraintTop_toBottomOf="@+id/SettingsButton" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/received_message_background"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/QuestionField"
+            app:layout_constraintStart_toStartOf="parent"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/typing_animation"
+            tools:visibility="gone" />
 
         <EditText
             android:id="@+id/QuestionField"
@@ -54,13 +68,15 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="Autofill" />
 
-        <Button
+        <ImageButton
             android:id="@+id/SendButton"
-            android:layout_width="88dp"
-            android:layout_height="58dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginEnd="2dp"
+            android:background="@drawable/circle_button_background"
+            android:contentDescription="@string/SearchButton"
             android:onClick="@{ () -> viewModel.chatCompletion(context)}"
-            android:text="@string/SearchButton"
+            android:src="@drawable/send_svgrepo_com"
             app:layout_constraintBottom_toBottomOf="@+id/QuestionField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/QuestionField" />
