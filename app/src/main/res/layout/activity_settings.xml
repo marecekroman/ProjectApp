@@ -27,7 +27,7 @@
 
         <Button
             android:id="@+id/btnDelete"
-            android:layout_width="106dp"
+            android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginStart="40dp"
             android:text="@string/btnDelete"
@@ -38,8 +38,8 @@
 
         <Spinner
             android:id="@+id/modelSelector"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="50dp"
             android:entries="@array/model_options"
@@ -58,8 +58,8 @@
 
         <EditText
             android:id="@+id/apiKey"
-            android:layout_width="210dp"
-            android:layout_height="70dp"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="60dp"
             android:ems="10"

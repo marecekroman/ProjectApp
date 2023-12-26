@@ -20,9 +20,9 @@
             android:id="@+id/messages"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="1dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="1dp"
+            android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/animationView"
@@ -50,9 +50,9 @@
             android:id="@+id/QuestionField"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginEnd="2dp"
-            android:layout_marginBottom="3dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/rounded_edittext_background"
             android:backgroundTintMode="src_in"
             android:ems="10"
@@ -83,17 +83,17 @@
 
         <ImageButton
             android:id="@+id/SettingsButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="3dp"
-            app:tint="?attr/colorOnPrimary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
             android:background="@drawable/circle_button_background"
             android:contentDescription="@string/SettingsButton"
             android:onClick="@{ () -> viewModel.toSettings() }"
+            android:src="@drawable/icons8_settings"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/icons8_settings" />
+            app:tint="?attr/colorOnPrimary" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
